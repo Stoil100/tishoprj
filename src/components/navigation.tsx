@@ -42,7 +42,7 @@ export default function Navigation() {
                         asChild
                         className="rounded-md bg-foreground px-3 py-2 text-secondary"
                     >
-                        <Link href="/app">
+                        <Link href="/groups">
                             <SignedOut>Вписване</SignedOut>{" "}
                             <SignedIn>Табло</SignedIn> <ChevronRight />
                         </Link>
