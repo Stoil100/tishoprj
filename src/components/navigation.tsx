@@ -1,6 +1,6 @@
 "use client";
 
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
@@ -26,28 +26,19 @@ export default function Navigation() {
         >
             <nav className="flex items-center justify-between p-4">
                 <div className="flex lg:flex-1">
-                    <Link href="/" className="-m-1.5 p-1.5">
-                        {/* <Image
-              alt="ByteBash Logo"
-              src="/logo.png"
-              width={256}
-              height={256}
-              className="w-32 dark:invert"
-            /> */}
-                    </Link>
-                </div>
-
-                <div className="flex items-center gap-2">
                     <Button
                         asChild
                         className="rounded-md bg-foreground px-3 py-2 text-secondary"
                     >
-                        <Link href="/groups">
-                            <SignedOut>Вписване</SignedOut>{" "}
-                            <SignedIn>Табло</SignedIn> <ChevronRight />
-                        </Link>
+                        <Button>
+                            <SignedOut><Link href="/auth">Вписване</Link></SignedOut>{" "}
+                            <SignedIn><Link href="/groups">Табло</Link></SignedIn> <ChevronRight />
+                        </Button>
                     </Button>
                 </div>
+                <SignedIn>
+                    <div className="flex items-center gap-2"><SignOutButton/></div>
+                </SignedIn>
             </nav>
         </header>
     );

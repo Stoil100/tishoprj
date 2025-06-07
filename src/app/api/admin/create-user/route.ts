@@ -1,6 +1,5 @@
-// app/api/admin/create-user/route.ts
-import { NextResponse } from "next/server";
 import { clerkClient } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
     try {
@@ -18,9 +17,8 @@ export async function POST(request: Request) {
             password,
             publicMetadata: { role: "choreographer" },
         });
-
         return NextResponse.json(
-            { message: 'User created', user },
+            { message: "User created", user },
             { status: 201 }
         );
     } catch (err: any) {
