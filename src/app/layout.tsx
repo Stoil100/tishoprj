@@ -1,7 +1,5 @@
 import Navigation from "@/components/navigation";
-import {
-  ClerkProvider
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -33,7 +31,7 @@ export default function RootLayout({
                     className={`${geistSans.variable} ${geistMono.variable} antialiased`}
                 >
                     <Navigation />
-                    {children}
+                    <div className="nav-offset">{children}</div>
                 </body>
             </html>
         </ClerkProvider>

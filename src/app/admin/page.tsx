@@ -1,24 +1,29 @@
-import CreateUserForm from '@/components/admin/forms/createUser'
-import { checkRole } from '@/utils/roles'
-import { clerkClient } from '@clerk/nextjs/server'
-import { redirect } from 'next/navigation'
+import CreateGroupForm from "@/components/admin/forms/createGroup";
+import CreateUserForm from "@/components/admin/forms/createUser";
+import { checkRole } from "@/utils/roles";
+import { eq } from "drizzle-orm";
+import { redirect } from "next/navigation";
+import { db } from "../db";
+import { users } from "../db/schema";
 
 export default async function AdminDashboard(params: {
-  searchParams: Promise<{ search?: string }>
+    searchParams: Promise<{ search?: string }>;
 }) {
-  if (!checkRole('admin')) {
-    redirect('/')
-  }
+    if (!checkRole("admin")) {
+        redirect("/");
+    }
+    const choreographers = await db
+        .select({
+            id: users.id,
+            username: users.username,
+        })
+        .from(users)
+        .where(eq(users.role, "choreographer"));
 
-  const query = (await params.searchParams).search
-
-  const client = await clerkClient()
-
-  const users = query ? (await client.users.getUserList({ query })).data : []
-
-  return (
-    <div>
-      <CreateUserForm />
-    </div>
-  )
+    return (
+        <div className="w-full h-screen-minus-nav flex justify-center items-center gap-4 p-4">
+            <CreateUserForm />
+            <CreateGroupForm choreographers={choreographers} />
+        </div>
+    );
 }

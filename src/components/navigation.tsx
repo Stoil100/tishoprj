@@ -1,13 +1,13 @@
 "use client";
 
-import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
-import { ChevronRight } from "lucide-react";
+import { SignedIn, SignedOut, SignOutButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 
 export default function Navigation() {
     const navRef = useRef<HTMLElement | null>(null);
+    const { user } = useUser();
 
     useEffect(() => {
         if (navRef.current) {
@@ -19,6 +19,8 @@ export default function Navigation() {
         }
     }, []);
 
+    const role = user?.publicMetadata?.role as string | undefined;
+
     return (
         <header
             ref={navRef}
@@ -26,18 +28,32 @@ export default function Navigation() {
         >
             <nav className="flex items-center justify-between p-4">
                 <div className="flex lg:flex-1">
-                    <Button
-                        asChild
-                        className="rounded-md bg-foreground px-3 py-2 text-secondary"
-                    >
-                        <Button>
-                            <SignedOut><Link href="/auth">Вписване</Link></SignedOut>{" "}
-                            <SignedIn><Link href="/groups">Табло</Link></SignedIn> <ChevronRight />
-                        </Button>
-                    </Button>
+                    <SignedOut>
+                        <Link href="/auth">Вписване</Link>
+                    </SignedOut>
+                    <SignedIn>
+                        {role === "admin" ? (
+                            <>
+                                <Button variant="ghost">
+                                    <Link href="/admin">Табло</Link>
+                                </Button>
+                                <Button variant="ghost">
+                                    <Link href="/admin/groups">Групи</Link>
+                                </Button>
+                            </>
+                        ) : (
+                            role === "choreographer" && (
+                                <Button variant="ghost">
+                                    <Link href="/groups">Табло</Link>
+                                </Button>
+                            )
+                        )}
+                    </SignedIn>
                 </div>
                 <SignedIn>
-                    <div className="flex items-center gap-2"><SignOutButton/></div>
+                    <div className="flex items-center gap-2">
+                        <SignOutButton />
+                    </div>
                 </SignedIn>
             </nav>
         </header>

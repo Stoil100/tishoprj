@@ -119,4 +119,13 @@
   body {
     @apply bg-background text-foreground;
   }
+  .nav-offset {
+    margin-top: var(--nav-height);
+  } 
+}
+
+@layer utilities {
+  .h-screen-minus-nav {
+    height: calc(100vh - var(--nav-height));
+  }
 }
