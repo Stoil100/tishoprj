@@ -85,7 +85,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
             </DialogTrigger>
             <DialogContent className="max-w-lg">
                 <DialogHeader>
-                    <DialogTitle>Rehearsal History</DialogTitle>
+                    <DialogTitle>История на репетициите</DialogTitle>
                 </DialogHeader>
 
                 <ScrollArea className="h-[500px] pr-4">
@@ -93,7 +93,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                         <div className="flex flex-col items-center justify-center py-8">
                             <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
                             <p className="mt-2 text-sm text-muted-foreground">
-                                Loading history...
+                                Зареждане на историята...
                             </p>
                         </div>
                     ) : error ? (
@@ -109,14 +109,14 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                                     setOpen(true); // This will trigger the useEffect to fetch again
                                 }}
                             >
-                                Try Again
+                                Опитай отново
                             </Button>
                         </div>
                     ) : history.length === 0 ? (
                         <div className="rounded-lg border border-dashed p-8 text-center">
                             <CalendarClock className="mx-auto h-8 w-8 text-muted-foreground" />
                             <p className="mt-2 text-sm text-muted-foreground">
-                                No rehearsal history available
+                                Няма налична история на репетиции
                             </p>
                         </div>
                     ) : (
@@ -152,17 +152,17 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                                         <div className="mt-2 grid grid-cols-2 gap-2 text-sm">
                                             <div>
                                                 <p className="text-muted-foreground">
-                                                    Attendance
+                                                    Присъствие
                                                 </p>
                                                 <p className="font-medium">
                                                     {item.attendanceCount}{" "}
-                                                    participants
+                                                    участници
                                                 </p>
                                             </div>
 
                                             <div>
                                                 <p className="text-muted-foreground">
-                                                    Payment Types
+                                                    Типове плащане
                                                 </p>
                                                 <div className="flex flex-wrap gap-1 mt-1">
                                                     {Object.entries(
@@ -181,7 +181,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                                         </div>
                                         <div>
                                             <p className="text-muted-foreground">
-                                                Хореограф/Id
+                                                Хореограф/ID
                                             </p>
                                             <p className="font-medium">
                                                 {item.choreographer_name}/
@@ -198,7 +198,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                                                 )}
                                             >
                                                 <p className="text-muted-foreground">
-                                                    Total Revenue
+                                                    Общи приходи
                                                 </p>
                                                 <p className="font-semibold text-green-600 dark:text-green-400">
                                                     {formatCurrency(
@@ -213,7 +213,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                                                 )}
                                             >
                                                 <p className="text-muted-foreground">
-                                                    Taxes (40%)
+                                                    Данъци (40%)
                                                 </p>
                                                 <p className="font-medium text-amber-600 dark:text-amber-400">
                                                     {formatCurrency(tax)}
@@ -226,7 +226,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                                                 )}
                                             >
                                                 <p className="text-muted-foreground">
-                                                    Choreographer
+                                                    Хореограф
                                                 </p>
                                                 <p className="font-medium text-blue-600 dark:text-blue-400">
                                                     {formatCurrency(

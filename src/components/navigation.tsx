@@ -1,6 +1,7 @@
 "use client";
 
 import { SignedIn, SignedOut, SignOutButton, useUser } from "@clerk/nextjs";
+import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { Button } from "./ui/button";
@@ -52,7 +53,11 @@ export default function Navigation() {
                 </div>
                 <SignedIn>
                     <div className="flex items-center gap-2">
-                        <SignOutButton />
+                        <SignOutButton>
+                            <div className="cursor-pointer flex items-center justify-center gap-2">
+                                Изход <LogOut />
+                            </div>
+                        </SignOutButton>
                     </div>
                 </SignedIn>
             </nav>

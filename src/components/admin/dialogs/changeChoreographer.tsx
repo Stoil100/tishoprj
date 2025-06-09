@@ -37,6 +37,7 @@ export function ChangeChoreographerDialog({
     const [selectedId, setSelectedId] = useState("");
     const [isSaving, setIsSaving] = useState(false);
     const router = useRouter();
+
     const handleSave = async () => {
         setIsSaving(true);
         await fetch(`/api/admin/groups/${groupId}/change-choreographer`, {
@@ -58,7 +59,7 @@ export function ChangeChoreographerDialog({
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Change Choreographer</DialogTitle>
+                    <DialogTitle>Смяна на хореограф</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4">
                     <Popover>
@@ -72,16 +73,16 @@ export function ChangeChoreographerDialog({
                                 )}
                             >
                                 {choreographers.find((c) => c.id === selectedId)
-                                    ?.username ?? "Select..."}
+                                    ?.username ?? "Изберете..."}
                                 <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
                             </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-full p-0">
                             <Command>
-                                <CommandInput placeholder="Search choreographers..." />
+                                <CommandInput placeholder="Търсене на хореографи..." />
                                 <CommandList>
                                     <CommandEmpty>
-                                        No choreographer found.
+                                        Не е намерен хореограф.
                                     </CommandEmpty>
                                     <CommandGroup>
                                         {choreographers.map((c) => (
@@ -112,7 +113,7 @@ export function ChangeChoreographerDialog({
                         disabled={!selectedId || isSaving}
                         className="w-full"
                     >
-                        {isSaving ? "Saving..." : "Save"}
+                        {isSaving ? "Запазване..." : "Запази"}
                     </Button>
                 </div>
             </DialogContent>

@@ -2,24 +2,24 @@
 
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from "@/components/ui/card";
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -91,10 +91,15 @@ export default function CreateUserForm() {
     return (
         <Card className="w-full max-w-md">
             <CardHeader>
-                <CardTitle>Create Account</CardTitle>
+                <div className="flex items-center gap-2">
+                    <User className="h-5 w-5 text-primary" />
+                    <CardTitle className="text-2xl">
+                        Създаване на профил
+                    </CardTitle>
+                </div>
                 <CardDescription>
-                    Enter information to create a new user as a{" "}
-                    <strong>choreographer</strong>.
+                    Въведете информация, за да създадете нов потребител с роля{" "}
+                    <strong>хореограф</strong>.
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -119,17 +124,17 @@ export default function CreateUserForm() {
                             name="username"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Username</FormLabel>
+                                    <FormLabel>Потребителско име</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="Enter a username"
+                                            placeholder="Въведете потребителско име"
                                             autoComplete="username"
                                             {...field}
                                         />
                                     </FormControl>
                                     <FormDescription>
-                                        Your unique username for the new
-                                        account.
+                                        Уникално потребителско име за новия
+                                        профил.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -141,18 +146,18 @@ export default function CreateUserForm() {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel>Имейл</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="email"
-                                            placeholder="Enter an email"
+                                            placeholder="Въведете имейл"
                                             autoComplete="email"
                                             {...field}
                                         />
                                     </FormControl>
                                     <FormDescription>
-                                        We'll never share your email with anyone
-                                        else.
+                                        Имейлът няма да бъде споделян с трети
+                                        страни.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -164,7 +169,7 @@ export default function CreateUserForm() {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Password</FormLabel>
+                                    <FormLabel>Парола</FormLabel>
                                     <FormControl>
                                         <div className="relative">
                                             <Input
@@ -173,7 +178,7 @@ export default function CreateUserForm() {
                                                         ? "text"
                                                         : "password"
                                                 }
-                                                placeholder="Enter a password"
+                                                placeholder="Въведете парола"
                                                 autoComplete="new-password"
                                                 {...field}
                                             />
@@ -181,7 +186,7 @@ export default function CreateUserForm() {
                                                 type="button"
                                                 variant="ghost"
                                                 size="sm"
-                                                className="absolute right-1 top-1"
+                                                className="absolute right-1 top-[2px]"
                                                 onClick={() =>
                                                     setShowPassword(
                                                         !showPassword
@@ -195,14 +200,15 @@ export default function CreateUserForm() {
                                                 )}
                                                 <span className="sr-only">
                                                     {showPassword
-                                                        ? "Hide password"
-                                                        : "Show password"}
+                                                        ? "Скрий паролата"
+                                                        : "Покажи паролата"}
                                                 </span>
                                             </Button>
                                         </div>
                                     </FormControl>
                                     <FormDescription>
-                                        Password must be at least 8 characters.
+                                        Паролата трябва да съдържа поне 8
+                                        символа.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -214,7 +220,7 @@ export default function CreateUserForm() {
                             className="w-full"
                             disabled={isSubmitting}
                         >
-                            {isSubmitting ? "Creating…" : "Create Account"}
+                            {isSubmitting ? "Създаване…" : "Създай профил"}
                         </Button>
                     </form>
                 </Form>

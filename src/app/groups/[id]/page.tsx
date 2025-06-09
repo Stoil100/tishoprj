@@ -49,7 +49,7 @@ export default async function GroupPage({ params }: PageProps) {
     const choreographerName = choreoUser?.username ?? "Unknown";
     return (
         <div className="max-w-6xl mx-auto py-12 space-y-8">
-            <h1 className="text-2xl font-semibold">Group: {group.name}</h1>
+            <h1 className="text-2xl font-semibold">Група: {group.name}</h1>
 
             <AddDancerForm groupId={groupId} />
 

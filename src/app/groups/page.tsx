@@ -21,7 +21,7 @@ export default async function GroupsPage() {
     // 3. Render
     return (
         <div className="max-w-4xl mx-auto py-12">
-            <h1 className="text-3xl font-semibold mb-6">Groups</h1>
+            <h1 className="text-3xl font-semibold mb-6">Групи</h1>
             {rows.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {rows.map((group: any) => (
@@ -35,7 +35,9 @@ export default async function GroupsPage() {
                     ))}
                 </div>
             ) : (
-                <p className="text-center text-gray-500">No groups found.</p>
+                <p className="text-center text-gray-500">
+                    Не са намерени групи.
+                </p>
             )}
         </div>
     );

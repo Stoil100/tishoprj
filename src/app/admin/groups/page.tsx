@@ -41,7 +41,7 @@ export default async function GroupsPage() {
         .where(eq(users.role, "choreographer"));
     return (
         <div className="max-w-4xl mx-auto py-12">
-            <h1 className="text-3xl font-semibold mb-6">Groups</h1>
+            <h1 className="text-3xl font-semibold mb-6">Групи</h1>
             {rows.length > 0 ? (
                 <Table>
                     <TableHeader>
@@ -76,7 +76,9 @@ export default async function GroupsPage() {
                     </TableBody>
                 </Table>
             ) : (
-                <p className="text-center text-gray-500">No groups found.</p>
+                <p className="text-center text-gray-500">
+                    Не са намерени групи.
+                </p>
             )}
         </div>
     );

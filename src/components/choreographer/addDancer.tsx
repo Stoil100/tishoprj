@@ -20,8 +20,8 @@ import * as z from "zod";
 const formSchema = z.object({
     name: z
         .string()
-        .min(1, "Dancer name is required")
-        .max(100, "Name must be less than 100 characters"),
+        .min(1, "Името на танцьора е задължително")
+        .max(100, "Името трябва да е под 100 символа"),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -60,19 +60,18 @@ export default function AddDancerForm({ groupId }: AddDancerFormProps) {
             if (res.ok) {
                 setSubmitStatus({
                     type: "success",
-                    message: "Dancer added successfully!",
+                    message: "Танцьорът беше добавен успешно!",
                 });
                 form.reset();
                 router.refresh();
             } else {
                 const errorText = await res.text();
-                let errorMessage = "Failed to add dancer";
+                let errorMessage = "Неуспешно добавяне на танцьор";
 
                 try {
                     const errorJson = JSON.parse(errorText);
                     errorMessage = errorJson.message || errorMessage;
                 } catch {
-                    // If response isn't JSON, use the text or default message
                     errorMessage = errorText || errorMessage;
                 }
 
@@ -84,7 +83,7 @@ export default function AddDancerForm({ groupId }: AddDancerFormProps) {
         } catch (error) {
             setSubmitStatus({
                 type: "error",
-                message: "Network error. Please try again.",
+                message: "Мрежова грешка. Опитайте отново.",
             });
         } finally {
             setIsSubmitting(false);
@@ -103,10 +102,10 @@ export default function AddDancerForm({ groupId }: AddDancerFormProps) {
                         name="name"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Dancer Name</FormLabel>
+                                <FormLabel>Име на танцьора</FormLabel>
                                 <FormControl>
                                     <Input
-                                        placeholder="e.g. Alice Smith"
+                                        placeholder="напр. Алиса Смит"
                                         disabled={isSubmitting}
                                         {...field}
                                     />
@@ -123,10 +122,10 @@ export default function AddDancerForm({ groupId }: AddDancerFormProps) {
                         {isSubmitting ? (
                             <>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                Adding Dancer...
+                                Добавяне...
                             </>
                         ) : (
-                            "Add Dancer"
+                            "Добави танцьор"
                         )}
                     </Button>
                 </form>

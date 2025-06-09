@@ -154,10 +154,10 @@ export default function PaymentTracker({
             {dancers.length > 0 ? (
                 <Card>
                     <CardHeader>
-                        <CardTitle>Dancers in Group</CardTitle>
+                        <CardTitle>Танцьори в групата</CardTitle>
                         <CardDescription>
-                            Click payment buttons to track attendance and
-                            payments
+                            Натиснете бутоните за плащане, за да отбележите
+                            присъствие и плащания
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -165,7 +165,7 @@ export default function PaymentTracker({
                         <div className="grid grid-cols-2 gap-4 p-4 bg-muted/50 rounded-lg">
                             <div>
                                 <Label htmlFor="rehearsal-date">
-                                    Rehearsal Date
+                                    Дата на репетиция
                                 </Label>
                                 <Input
                                     id="rehearsal-date"
@@ -179,8 +179,9 @@ export default function PaymentTracker({
 
                             <div>
                                 <Label htmlFor="rehearsal-time">
-                                    Rehearsal Time
+                                    Час на репетиция
                                 </Label>
+
                                 <div className="flex items-center space-x-2">
                                     <Input
                                         id="rehearsal-start-time"
@@ -195,7 +196,7 @@ export default function PaymentTracker({
                                         min="00:00"
                                         max="23:59"
                                     />
-                                    <span>to</span>
+                                    <span>до</span>
                                     <Input
                                         id="rehearsal-end-time"
                                         type="time"
@@ -216,16 +217,16 @@ export default function PaymentTracker({
                                 <TableHeader>
                                     <TableRow>
                                         <TableHead>ID</TableHead>
-                                        <TableHead>Name</TableHead>
-                                        <TableHead>Added At</TableHead>
+                                        <TableHead>Име</TableHead>
+                                        <TableHead>Добавен на</TableHead>
                                         <TableHead className="text-center">
-                                            Cash/Card (10lv)
+                                            В брой/Карта (10лв)
                                         </TableHead>
                                         <TableHead className="text-center">
-                                            Sport Cards (8lv)
+                                            Спортни карти (8лв)
                                         </TableHead>
                                         <TableHead className="text-center">
-                                            Monthly/Presence
+                                            Месечно/Присъствие
                                         </TableHead>
                                     </TableRow>
                                 </TableHeader>
@@ -259,7 +260,7 @@ export default function PaymentTracker({
                                                     >
                                                         <Banknote className="h-4 w-4" />
                                                         <span className="sr-only">
-                                                            Cash Payment
+                                                            Плащане в брой
                                                         </span>
                                                     </Button>
                                                     <Button
@@ -278,7 +279,7 @@ export default function PaymentTracker({
                                                     >
                                                         <CreditCard className="h-4 w-4" />
                                                         <span className="sr-only">
-                                                            Card Payment
+                                                            Плащане с карта
                                                         </span>
                                                     </Button>
                                                 </div>
@@ -303,7 +304,7 @@ export default function PaymentTracker({
                                                     >
                                                         <div className="w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-sm"></div>
                                                         <span className="sr-only">
-                                                            Multisport Card
+                                                            Multisport Карта
                                                         </span>
                                                     </Button>
                                                     <Button
@@ -322,7 +323,7 @@ export default function PaymentTracker({
                                                     >
                                                         <div className="w-4 h-4 bg-gradient-to-r from-green-500 to-teal-500 rounded-sm"></div>
                                                         <span className="sr-only">
-                                                            Coolsport Card
+                                                            Coolsport Карта
                                                         </span>
                                                     </Button>
                                                 </div>
@@ -347,7 +348,7 @@ export default function PaymentTracker({
                                                     >
                                                         <Calendar className="h-4 w-4" />
                                                         <span className="sr-only">
-                                                            Monthly Payment
+                                                            Месечно плащане
                                                         </span>
                                                     </Button>
                                                     <Button
@@ -366,7 +367,7 @@ export default function PaymentTracker({
                                                     >
                                                         <UserCheck className="h-4 w-4" />
                                                         <span className="sr-only">
-                                                            Mark Presence
+                                                            Отбележи присъствие
                                                         </span>
                                                     </Button>
                                                 </div>
@@ -386,14 +387,15 @@ export default function PaymentTracker({
                                 <DialogTrigger asChild>
                                     <Button className="gap-2">
                                         <Receipt className="h-4 w-4" />
-                                        Generate Summary (
-                                        {presentDancers.length} present)
+                                        Генерирай обобщение (
+                                        {presentDancers.length} присъстващи)
                                     </Button>
                                 </DialogTrigger>
                                 <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                                     <DialogHeader>
                                         <DialogTitle>
-                                            Rehearsal Summary - {groupName}
+                                            Обобщение на репетицията –{" "}
+                                            {groupName}
                                         </DialogTitle>
                                     </DialogHeader>
 
@@ -404,20 +406,22 @@ export default function PaymentTracker({
                                             rehearsalEndTime) && (
                                             <div className="p-4 bg-muted/50 rounded-lg">
                                                 <h3 className="font-semibold mb-2">
-                                                    Rehearsal Details
+                                                    Детайли за репетицията
                                                 </h3>
                                                 {rehearsalDate && (
                                                     <p>
-                                                        Date:{" "}
+                                                        Дата:{" "}
                                                         {new Date(
                                                             rehearsalDate
-                                                        ).toLocaleDateString()}
+                                                        ).toLocaleDateString(
+                                                            "bg-BG"
+                                                        )}
                                                     </p>
                                                 )}
                                                 {rehearsalStartTime &&
                                                     rehearsalEndTime && (
                                                         <p>
-                                                            Time:{" "}
+                                                            Час:{" "}
                                                             {rehearsalStartTime}{" "}
                                                             - {rehearsalEndTime}
                                                         </p>
@@ -428,9 +432,10 @@ export default function PaymentTracker({
                                         {/* Present Dancers */}
                                         <div>
                                             <h3 className="font-semibold mb-3">
-                                                Present Dancers (
+                                                Присъстващи танцьори (
                                                 {presentDancers.length})
                                             </h3>
+
                                             <div className="space-y-2">
                                                 {presentDancers.map(
                                                     (dancer) => (
@@ -471,7 +476,7 @@ export default function PaymentTracker({
                                         {absentDancers.length > 0 && (
                                             <div>
                                                 <h3 className="font-semibold mb-3">
-                                                    Absent Dancers (
+                                                    Отсъстващи танцьори (
                                                     {absentDancers.length})
                                                 </h3>
                                                 <div className="space-y-2">
@@ -487,7 +492,7 @@ export default function PaymentTracker({
                                                                     }
                                                                 </span>
                                                                 <span className="text-sm text-muted-foreground">
-                                                                    Absent
+                                                                    Отсъстващ
                                                                 </span>
                                                             </div>
                                                         )
@@ -501,34 +506,34 @@ export default function PaymentTracker({
                                         {/* Financial Summary */}
                                         <div className="space-y-4">
                                             <h3 className="font-semibold">
-                                                Financial Summary
+                                                Финансово обобщение
                                             </h3>
 
                                             <div className="grid grid-cols-3 gap-4 text-center">
                                                 <div className="p-4 bg-blue-50 rounded-lg">
                                                     <div className="text-2xl font-bold text-blue-600">
-                                                        {totalRevenue}lv
+                                                        {totalRevenue}лв
                                                     </div>
                                                     <div className="text-sm text-muted-foreground">
-                                                        Total Revenue
+                                                        Общо приходи
                                                     </div>
                                                 </div>
 
                                                 <div className="p-4 bg-orange-50 rounded-lg">
                                                     <div className="text-2xl font-bold text-orange-600">
-                                                        {managersShare}lv
+                                                        {managersShare}лв
                                                     </div>
                                                     <div className="text-sm text-muted-foreground">
-                                                        Managers (40%)
+                                                        Мениджъри (40%)
                                                     </div>
                                                 </div>
 
                                                 <div className="p-4 bg-green-50 rounded-lg">
                                                     <div className="text-2xl font-bold text-green-600">
-                                                        {choreographerShare}lv
+                                                        {choreographerShare}лв
                                                     </div>
                                                     <div className="text-sm text-muted-foreground">
-                                                        Choreographer (60%)
+                                                        Хореограф (60%)
                                                     </div>
                                                 </div>
                                             </div>
@@ -543,7 +548,7 @@ export default function PaymentTracker({
                 <Card>
                     <CardContent className="py-8">
                         <p className="text-center text-muted-foreground">
-                            No dancers yet in this group.
+                            Все още няма танцьори в тази група.
                         </p>
                     </CardContent>
                 </Card>

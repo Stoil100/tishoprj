@@ -92,11 +92,13 @@ export default function CreateGroupForm({
             <CardHeader className="space-y-1">
                 <div className="flex items-center gap-2">
                     <Users className="h-5 w-5 text-primary" />
-                    <CardTitle className="text-2xl">Create New Group</CardTitle>
+                    <CardTitle className="text-2xl">
+                        Създаване на нова група
+                    </CardTitle>
                 </div>
                 <CardDescription>
-                    Set up a new dance group and assign a choreographer to lead
-                    it.
+                    Създайте нова танцова група и назначете хореограф, който да
+                    я ръководи.
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -112,18 +114,18 @@ export default function CreateGroupForm({
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel className="text-base font-medium">
-                                        Group Name
+                                        Име на групата
                                     </FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="e.g., Junior Ballet Ensemble, Hip-Hop Crew"
+                                            placeholder="напр. Клуб Моряците"
                                             className="h-11"
                                             {...field}
                                         />
                                     </FormControl>
                                     <FormDescription>
-                                        Choose a descriptive name for your dance
-                                        group
+                                        Изберете описателно име за вашата
+                                        танцова група
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -137,7 +139,7 @@ export default function CreateGroupForm({
                             render={({ field }) => (
                                 <FormItem className="flex flex-col">
                                     <FormLabel className="text-base font-medium">
-                                        Choreographer
+                                        Хореограф
                                     </FormLabel>
                                     <Popover open={open} onOpenChange={setOpen}>
                                         <PopoverTrigger asChild>
@@ -154,7 +156,7 @@ export default function CreateGroupForm({
                                                 >
                                                     {selectedChoreographer
                                                         ? selectedChoreographer.username
-                                                        : "Select choreographer..."}
+                                                        : "Изберете хореограф..."}
                                                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                                 </Button>
                                             </FormControl>
@@ -165,12 +167,13 @@ export default function CreateGroupForm({
                                         >
                                             <Command>
                                                 <CommandInput
-                                                    placeholder="Search choreographers..."
+                                                    placeholder="Търсене на хореографи..."
                                                     className="h-9"
                                                 />
                                                 <CommandList>
                                                     <CommandEmpty>
-                                                        No choreographer found.
+                                                        Няма намерени
+                                                        хореографи.
                                                     </CommandEmpty>
                                                     <CommandGroup>
                                                         {choreographers.map(
@@ -212,8 +215,8 @@ export default function CreateGroupForm({
                                         </PopoverContent>
                                     </Popover>
                                     <FormDescription>
-                                        Search and select the choreographer who
-                                        will lead this group
+                                        Потърсете и изберете хореограф, който ще
+                                        ръководи групата
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>
@@ -226,7 +229,7 @@ export default function CreateGroupForm({
                                 disabled={isSubmitting}
                                 className="flex-1"
                             >
-                                {isSubmitting ? "Creating..." : "Create Group"}
+                                {isSubmitting ? "Създаване..." : "Създай група"}
                             </Button>
                         </div>
                     </form>
