@@ -5,9 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    context: { params: { id: string } }
 ) {
-    const groupId = Number(params.id);
+    const groupId = Number(context.params.id);
     const { choreographer_id } = await req.json();
 
     await db
