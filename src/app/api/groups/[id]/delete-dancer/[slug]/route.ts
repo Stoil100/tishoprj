@@ -4,7 +4,6 @@ import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function DELETE(
-    req: Request,
     { params }: { params: { slug: string } }
 ) {
     const dancerId = parseInt(params.slug);

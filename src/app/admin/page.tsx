@@ -6,9 +6,7 @@ import { redirect } from "next/navigation";
 import { db } from "../db";
 import { users } from "../db/schema";
 
-export default async function AdminDashboard(params: {
-    searchParams: Promise<{ search?: string }>;
-}) {
+export default async function AdminDashboard() {
     if (!checkRole("admin")) {
         redirect("/");
     }

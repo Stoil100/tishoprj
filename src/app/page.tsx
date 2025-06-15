@@ -22,7 +22,6 @@ export default function Home() {
     return (
         <div className="flex flex-col min-h-screen">
             <main className="flex-1">
-                {/* Герой секция */}
                 <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-br from-blue-50 to-blue-100 flex justify-center">
                     <div className="container px-4 md:px-6">
                         <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
@@ -246,8 +245,7 @@ export default function Home() {
                                 </h2>
                                 <p className="mx-auto max-w-[600px] text-blue-100 md:text-xl">
                                     Присъединете се към стотици хореографи,
-                                    които вече оптимизираха работния си процес с
-                                    ChoreoPro. Започнете още днес.
+                                    които вече оптимизираха работния си процес. Започнете още днес.
                                 </p>
                             </div>
                             <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -267,7 +265,7 @@ export default function Home() {
             {/* Footer */}
             <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
                 <p className="text-xs text-muted-foreground">
-                    © 2024 ChoreoPro. Всички права запазени.
+                    © 2024. Всички права запазени.
                 </p>
             </footer>
         </div>

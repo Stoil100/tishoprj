@@ -32,10 +32,6 @@ interface AddDancerFormProps {
 
 export default function AddDancerForm({ groupId }: AddDancerFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState<{
-        type: "success" | "error" | null;
-        message: string;
-    }>({ type: null, message: "" });
 
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
@@ -48,7 +44,6 @@ export default function AddDancerForm({ groupId }: AddDancerFormProps) {
 
     const onSubmit = async (data: FormValues) => {
         setIsSubmitting(true);
-        setSubmitStatus({ type: null, message: "" });
 
         try {
             const res = await fetch(`/api/groups/${groupId}/add-dancer`, {
@@ -58,10 +53,6 @@ export default function AddDancerForm({ groupId }: AddDancerFormProps) {
             });
 
             if (res.ok) {
-                setSubmitStatus({
-                    type: "success",
-                    message: "Танцьорът беше добавен успешно!",
-                });
                 form.reset();
                 router.refresh();
             } else {
@@ -74,17 +65,10 @@ export default function AddDancerForm({ groupId }: AddDancerFormProps) {
                 } catch {
                     errorMessage = errorText || errorMessage;
                 }
-
-                setSubmitStatus({
-                    type: "error",
-                    message: errorMessage,
-                });
+                console.error(errorMessage);
             }
         } catch (error) {
-            setSubmitStatus({
-                type: "error",
-                message: "Мрежова грешка. Опитайте отново.",
-            });
+            console.error(error);
         } finally {
             setIsSubmitting(false);
         }
@@ -105,7 +89,7 @@ export default function AddDancerForm({ groupId }: AddDancerFormProps) {
                                 <FormLabel>Име на танцьора</FormLabel>
                                 <FormControl>
                                     <Input
-                                        placeholder="напр. Алиса Смит"
+                                        placeholder="напр. Иван Иванов"
                                         disabled={isSubmitting}
                                         {...field}
                                     />
