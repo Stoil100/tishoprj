@@ -1,9 +1,9 @@
 import { db } from "@/app/db";
 import { dancers } from "@/app/db/schema";
 import { eq } from "drizzle-orm";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE({ params }: { params: Promise<{ slug: string }> }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
     const dancerId = parseInt(slug);
     if (isNaN(dancerId)) {
