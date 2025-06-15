@@ -1,7 +1,7 @@
 import { db } from "@/app/db";
 import { rehearsal_attendance, rehearsals, users } from "@/app/db/schema";
 import { eq, inArray } from "drizzle-orm";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const PAYMENT_RATES: Record<string, number> = {
     cash: 10,
@@ -12,8 +12,11 @@ const PAYMENT_RATES: Record<string, number> = {
     presence: 0,
 };
 
-export async function GET({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
+export async function GET(
+    req: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
+     const { id } = await params;
     const groupId = Number(id);
 
     const rehearsalList = await db
