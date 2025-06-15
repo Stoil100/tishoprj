@@ -80,9 +80,9 @@ export default function CreateUserForm() {
             setSuccessMessage(
                 `Successfully created user "${data.username}" (ID: ${data.id}).`
             );
-        } catch (err: any) {
-            console.error("Create User Error:", err);
-            setErrorMessage(err.message || "Something went wrong.");
+        } catch (error) {
+            console.error("Create User Error:", error);
+            setErrorMessage("Something went wrong.");
         } finally {
             setIsSubmitting(false);
         }

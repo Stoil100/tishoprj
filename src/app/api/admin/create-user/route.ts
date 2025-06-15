@@ -21,10 +21,10 @@ export async function POST(request: Request) {
             { message: "User created", user },
             { status: 201 }
         );
-    } catch (err: any) {
-        console.error("Error in /api/admin/create-user:", err);
+    } catch (error) {
+        console.error("Error in /api/admin/create-user:", error);
         return NextResponse.json(
-            { error: err.message || "Something went wrong." },
+            { error: error || "Something went wrong." },
             { status: 400 }
         );
     }
