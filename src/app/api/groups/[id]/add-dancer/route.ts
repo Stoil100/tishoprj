@@ -13,14 +13,14 @@ const bodySchema = z.object({
 
 export async function POST(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     const { userId, sessionClaims } = getAuth(req);
     if (!userId) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    const groupId = Number(params.id);
+     const { id } = await params;
+    const groupId = Number(id);
     const [group] = await db
         .select({ choreographer_id: groups.choreographer_id })
         .from(groups)
