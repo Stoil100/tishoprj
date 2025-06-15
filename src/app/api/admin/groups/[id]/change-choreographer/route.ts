@@ -3,8 +3,10 @@ import { groups } from "@/app/db/schema";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
+
 export async function PATCH(
     req: NextRequest,
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     context: { params: { id: string } }
 ) {
     const groupId = Number(context.params.id);
