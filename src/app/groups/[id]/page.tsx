@@ -6,12 +6,13 @@ import { auth } from "@clerk/nextjs/server";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 
-interface PageProps {
-    params: { id: string };
-}
-
-export default async function GroupPage({ params }: PageProps) {
-    const groupId = Number(await params.id);
+export default async function GroupPage({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}) {
+    const { id } = await params;
+    const groupId = Number(id);
     const { userId } = await auth();
 
     // Load the group
