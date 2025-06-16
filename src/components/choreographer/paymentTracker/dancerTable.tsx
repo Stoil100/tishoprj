@@ -35,8 +35,12 @@ export function DancerTable({
 
     const handleDelete = async (id: number) => {
         startTransition(async () => {
-            await fetch(`/api/groups/${paramsId}/delete-dancer/${id}`, {
+            await fetch(`/api/groups/${paramsId}/delete-dancer}`, {
                 method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id }),
             });
             router.refresh(); // Optionally use SWR/mutate instead for better UX
         });

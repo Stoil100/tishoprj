@@ -9,18 +9,19 @@ import { z } from "zod";
 
 const bodySchema = z.object({
     name: z.string().min(1),
+    groupId: z.number(),
 });
 
 export async function POST(
-    req: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    req: NextRequest
 ) {
     const { userId, sessionClaims } = getAuth(req);
     if (!userId) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-     const { id } = await params;
-    const groupId = Number(id);
+    const json = await req.json();
+    const { name, groupId } = bodySchema.parse(json);
+    
     const [group] = await db
         .select({ choreographer_id: groups.choreographer_id })
         .from(groups)
@@ -38,8 +39,6 @@ export async function POST(
     ) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
-    const json = await req.json();
-    const { name } = bodySchema.parse(json);
 
     const [created] = await db
         .insert(dancers)

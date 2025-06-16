@@ -49,8 +49,8 @@ export default function AddDancerForm({ groupId }: AddDancerFormProps) {
             const res = await fetch(`/api/groups/${groupId}/add-dancer`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            });
+                 body: JSON.stringify({ ...data, groupId }), // 👈 include groupId here
+        });
 
             if (res.ok) {
                 form.reset();

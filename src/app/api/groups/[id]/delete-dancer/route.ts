@@ -3,9 +3,9 @@ import { dancers } from "@/app/db/schema";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
-    const { slug } = await params;
-    const dancerId = parseInt(slug);
+export async function DELETE(req: NextRequest) {
+    const { id } = await req.json();
+    const dancerId = parseInt(id);
     if (isNaN(dancerId)) {
         return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
     }
