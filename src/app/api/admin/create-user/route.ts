@@ -9,10 +9,9 @@ export async function POST(request: Request) {
             email: string;
             password: string;
         };
-
         const client = await clerkClient();
         const user = await client.users.createUser({
-            username: username,
+            username,
             emailAddress: [email],
             password,
             publicMetadata: { role: "choreographer" },
