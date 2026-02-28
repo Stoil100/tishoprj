@@ -55,7 +55,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                 setError(
                     err instanceof Error
                         ? err.message
-                        : "Failed to load history"
+                        : "Failed to load history",
                 );
                 console.error("Error fetching group history:", err);
             } finally {
@@ -133,7 +133,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                                         <div className="flex items-center justify-between">
                                             <h3 className="font-medium">
                                                 {new Date(
-                                                    item.date
+                                                    item.date,
                                                 ).toLocaleDateString("en-GB", {
                                                     day: "numeric",
                                                     month: "short",
@@ -166,7 +166,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                                                 </p>
                                                 <div className="flex flex-wrap gap-1 mt-1">
                                                     {Object.entries(
-                                                        item.payments
+                                                        item.payments,
                                                     ).map(([type, count]) => (
                                                         <Badge
                                                             key={type}
@@ -194,7 +194,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                                         <div className="grid grid-cols-3 gap-2 text-sm">
                                             <div
                                                 className={cn(
-                                                    "rounded-md p-2 bg-green-50 dark:bg-green-950/30"
+                                                    "rounded-md p-2 bg-green-50 dark:bg-green-950/30",
                                                 )}
                                             >
                                                 <p className="text-muted-foreground">
@@ -202,14 +202,14 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                                                 </p>
                                                 <p className="font-semibold text-green-600 dark:text-green-400">
                                                     {formatCurrency(
-                                                        item.revenue
+                                                        item.revenue,
                                                     )}
                                                 </p>
                                             </div>
 
                                             <div
                                                 className={cn(
-                                                    "rounded-md p-2 bg-amber-50 dark:bg-amber-950/30"
+                                                    "rounded-md p-2 bg-amber-50 dark:bg-amber-950/30",
                                                 )}
                                             >
                                                 <p className="text-muted-foreground">
@@ -222,7 +222,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
 
                                             <div
                                                 className={cn(
-                                                    "rounded-md p-2 bg-blue-50 dark:bg-blue-950/30"
+                                                    "rounded-md p-2 bg-blue-50 dark:bg-blue-950/30",
                                                 )}
                                             >
                                                 <p className="text-muted-foreground">
@@ -230,7 +230,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
                                                 </p>
                                                 <p className="font-medium text-blue-600 dark:text-blue-400">
                                                     {formatCurrency(
-                                                        choreographerShare
+                                                        choreographerShare,
                                                     )}
                                                 </p>
                                             </div>

@@ -38,6 +38,7 @@ export default async function GroupPage({
             id: dancers.id,
             name: dancers.name,
             created_at: dancers.created_at,
+            monthly_paid_at: dancers.monthly_paid_at,
         })
         .from(dancers)
         .where(eq(dancers.group_id, groupId));

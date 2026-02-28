@@ -13,7 +13,7 @@ export function FinancialSummaryComponent({ summary }: FinancialSummaryProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                 <div className="p-4 bg-blue-50 rounded-lg border">
                     <div className="text-2xl font-bold text-blue-600">
-                        {totalRevenue}lv
+                        {totalRevenue}€
                     </div>
                     <div className="text-sm text-muted-foreground">
                         Обща печалба
@@ -22,7 +22,7 @@ export function FinancialSummaryComponent({ summary }: FinancialSummaryProps) {
 
                 <div className="p-4 bg-orange-50 rounded-lg border">
                     <div className="text-2xl font-bold text-orange-600">
-                        {managersShare}lv
+                        {managersShare}€
                     </div>
                     <div className="text-sm text-muted-foreground">
                         Такси (40%)
@@ -31,7 +31,7 @@ export function FinancialSummaryComponent({ summary }: FinancialSummaryProps) {
 
                 <div className="p-4 bg-green-50 rounded-lg border">
                     <div className="text-2xl font-bold text-green-600">
-                        {choreographerShare}lv
+                        {choreographerShare}€
                     </div>
                     <div className="text-sm text-muted-foreground">
                         Хореограф (60%)

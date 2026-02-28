@@ -15,7 +15,7 @@ export default function Navigation() {
             const navHeight = navRef.current.offsetHeight;
             document.documentElement.style.setProperty(
                 "--nav-height",
-                `${navHeight}px`
+                `${navHeight}px`,
             );
         }
     }, []);

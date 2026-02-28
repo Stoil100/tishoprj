@@ -8,6 +8,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { useCallback, useMemo, useState } from "react";
+
 import { DancerTable } from "./dancerTable";
 import { RehearsalInfoComponent } from "./rehearsalInfo";
 import { SummaryDialog } from "./summaryDialog";
@@ -51,7 +52,7 @@ export default function PaymentTracker({
                     } else {
                         // Обнови типа на плащане
                         return prev.map((p) =>
-                            p.dancerId === dancerId ? { ...p, paymentType } : p
+                            p.dancerId === dancerId ? { ...p, paymentType } : p,
                         );
                     }
                 } else {
@@ -60,7 +61,7 @@ export default function PaymentTracker({
                 }
             });
         },
-        []
+        [],
     );
 
     const financialSummary = useMemo(() => {
@@ -137,7 +138,7 @@ export default function PaymentTracker({
                         onOpenChange={setIsDialogOpen}
                         groupName={groupName}
                         rehearsalInfo={rehearsalInfo}
-                        presentDancers={presentDancers!}
+                        presentDancers={presentDancers}
                         absentDancers={absentDancers}
                         financialSummary={financialSummary}
                         choreographerName={choreographerName}

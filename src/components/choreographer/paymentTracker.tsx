@@ -98,7 +98,7 @@ export default function PaymentTracker({
                 } else {
                     // Update payment type
                     return prev.map((p) =>
-                        p.dancerId === dancerId ? { ...p, paymentType } : p
+                        p.dancerId === dancerId ? { ...p, paymentType } : p,
                     );
                 }
             } else {
@@ -190,7 +190,7 @@ export default function PaymentTracker({
                                         value={rehearsalStartTime}
                                         onChange={(e) =>
                                             setRehearsalStartTime(
-                                                e.target.value
+                                                e.target.value,
                                             )
                                         }
                                         min="00:00"
@@ -237,7 +237,7 @@ export default function PaymentTracker({
                                             <TableCell>{d.name}</TableCell>
                                             <TableCell>
                                                 {new Date(
-                                                    d.created_at
+                                                    d.created_at,
                                                 ).toLocaleString()}
                                             </TableCell>
 
@@ -248,13 +248,13 @@ export default function PaymentTracker({
                                                         size="sm"
                                                         variant={getButtonVariant(
                                                             d.id,
-                                                            "cash"
+                                                            "cash",
                                                         )}
                                                         className="h-8 w-8 p-0"
                                                         onClick={() =>
                                                             handlePaymentClick(
                                                                 d.id,
-                                                                "cash"
+                                                                "cash",
                                                             )
                                                         }
                                                     >
@@ -267,13 +267,13 @@ export default function PaymentTracker({
                                                         size="sm"
                                                         variant={getButtonVariant(
                                                             d.id,
-                                                            "card"
+                                                            "card",
                                                         )}
                                                         className="h-8 w-8 p-0"
                                                         onClick={() =>
                                                             handlePaymentClick(
                                                                 d.id,
-                                                                "card"
+                                                                "card",
                                                             )
                                                         }
                                                     >
@@ -292,13 +292,13 @@ export default function PaymentTracker({
                                                         size="sm"
                                                         variant={getButtonVariant(
                                                             d.id,
-                                                            "multisport"
+                                                            "multisport",
                                                         )}
                                                         className="h-8 w-8 p-0"
                                                         onClick={() =>
                                                             handlePaymentClick(
                                                                 d.id,
-                                                                "multisport"
+                                                                "multisport",
                                                             )
                                                         }
                                                     >
@@ -311,13 +311,13 @@ export default function PaymentTracker({
                                                         size="sm"
                                                         variant={getButtonVariant(
                                                             d.id,
-                                                            "coolsport"
+                                                            "coolsport",
                                                         )}
                                                         className="h-8 w-8 p-0"
                                                         onClick={() =>
                                                             handlePaymentClick(
                                                                 d.id,
-                                                                "coolsport"
+                                                                "coolsport",
                                                             )
                                                         }
                                                     >
@@ -336,13 +336,13 @@ export default function PaymentTracker({
                                                         size="sm"
                                                         variant={getButtonVariant(
                                                             d.id,
-                                                            "monthly"
+                                                            "monthly",
                                                         )}
                                                         className="h-8 w-8 p-0"
                                                         onClick={() =>
                                                             handlePaymentClick(
                                                                 d.id,
-                                                                "monthly"
+                                                                "monthly",
                                                             )
                                                         }
                                                     >
@@ -355,13 +355,13 @@ export default function PaymentTracker({
                                                         size="sm"
                                                         variant={getButtonVariant(
                                                             d.id,
-                                                            "presence"
+                                                            "presence",
                                                         )}
                                                         className="h-8 w-8 p-0"
                                                         onClick={() =>
                                                             handlePaymentClick(
                                                                 d.id,
-                                                                "presence"
+                                                                "presence",
                                                             )
                                                         }
                                                     >
@@ -412,9 +412,9 @@ export default function PaymentTracker({
                                                     <p>
                                                         Дата:{" "}
                                                         {new Date(
-                                                            rehearsalDate
+                                                            rehearsalDate,
                                                         ).toLocaleDateString(
-                                                            "bg-BG"
+                                                            "bg-BG",
                                                         )}
                                                     </p>
                                                 )}
@@ -462,12 +462,12 @@ export default function PaymentTracker({
                                                                                   dancer
                                                                                       .paymentType
                                                                               ]
-                                                                          }lv`
-                                                                        : "0lv"}
+                                                                          }€`
+                                                                        : "0€"}
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                    )
+                                                    ),
                                                 )}
                                             </div>
                                         </div>
@@ -495,7 +495,7 @@ export default function PaymentTracker({
                                                                     Отсъстващ
                                                                 </span>
                                                             </div>
-                                                        )
+                                                        ),
                                                     )}
                                                 </div>
                                             </div>

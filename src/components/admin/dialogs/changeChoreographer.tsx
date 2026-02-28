@@ -69,7 +69,7 @@ export function ChangeChoreographerDialog({
                                 role="combobox"
                                 className={cn(
                                     "w-full justify-between",
-                                    !selectedId && "text-muted-foreground"
+                                    !selectedId && "text-muted-foreground",
                                 )}
                             >
                                 {choreographers.find((c) => c.id === selectedId)
@@ -97,7 +97,7 @@ export function ChangeChoreographerDialog({
                                                         "mr-2 h-4 w-4",
                                                         selectedId === c.id
                                                             ? "opacity-100"
-                                                            : "opacity-0"
+                                                            : "opacity-0",
                                                     )}
                                                 />
                                                 {c.username}

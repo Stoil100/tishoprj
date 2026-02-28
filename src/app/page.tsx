@@ -245,7 +245,8 @@ export default function Home() {
                                 </h2>
                                 <p className="mx-auto max-w-[600px] text-blue-100 md:text-xl">
                                     Присъединете се към стотици хореографи,
-                                    които вече оптимизираха работния си процес. Започнете още днес.
+                                    които вече оптимизираха работния си процес.
+                                    Започнете още днес.
                                 </p>
                             </div>
                             <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -265,7 +266,7 @@ export default function Home() {
             {/* Footer */}
             <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
                 <p className="text-xs text-muted-foreground">
-                    © 2024. Всички права запазени.
+                    © 2026. Всички права запазени.
                 </p>
             </footer>
         </div>

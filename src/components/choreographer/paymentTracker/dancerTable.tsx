@@ -35,7 +35,7 @@ export function DancerTable({
 
     const handleDelete = async (id: number) => {
         startTransition(async () => {
-            await fetch(`/api/groups/${paramsId}/delete-dancer}`, {
+            await fetch(`/api/groups/${paramsId}/delete-dancer`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -54,10 +54,10 @@ export function DancerTable({
                         <TableHead>Име</TableHead>
                         <TableHead>Добавен на</TableHead>
                         <TableHead className="text-center">
-                            В брой/С карта (10лв)
+                            В брой/С карта (10€)
                         </TableHead>
                         <TableHead className="text-center">
-                            Спортни карти (8лв)
+                            Спортни карти (8€)
                         </TableHead>
                         <TableHead className="text-center">
                             Месечно/Присъствие
@@ -96,6 +96,7 @@ export function DancerTable({
                                     onPaymentClick={onPaymentClick}
                                     getButtonVariant={getButtonVariant}
                                     group="monthly-presence"
+                                    monthlyPaidAt={dancer.monthly_paid_at}
                                 />
                             </TableCell>
                             <TableCell className="text-center">

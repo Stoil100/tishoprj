@@ -116,7 +116,7 @@ export function SummaryDialog({
                                 <p>
                                     Дата:{" "}
                                     {new Date(
-                                        rehearsalInfo.date
+                                        rehearsalInfo.date,
                                     ).toLocaleDateString()}
                                 </p>
                             )}

@@ -14,9 +14,9 @@ const PAYMENT_RATES: Record<string, number> = {
 
 export async function GET(
     req: NextRequest,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: { params: Promise<{ id: string }> },
 ) {
-     const { id } = await params;
+    const { id } = await params;
     const groupId = Number(id);
 
     const rehearsalList = await db
@@ -32,18 +32,20 @@ export async function GET(
         .innerJoin(users, eq(rehearsals.choreographer_id, users.id))
         .where(eq(rehearsals.group_id, groupId));
 
-    const attendanceList = await db
-        .select({
-            rehearsal_id: rehearsal_attendance.rehearsal_id,
-            payment_type: rehearsal_attendance.payment_type,
-        })
-        .from(rehearsal_attendance)
-        .where(
-            inArray(
-                rehearsal_attendance.rehearsal_id,
-                rehearsalList.map((r) => r.id)
-            )
-        );
+    const rehearsalIds = rehearsalList.map((r) => r.id);
+
+    const attendanceList =
+        rehearsalIds.length > 0
+            ? await db
+                  .select({
+                      rehearsal_id: rehearsal_attendance.rehearsal_id,
+                      payment_type: rehearsal_attendance.payment_type,
+                  })
+                  .from(rehearsal_attendance)
+                  .where(
+                      inArray(rehearsal_attendance.rehearsal_id, rehearsalIds),
+                  )
+            : [];
 
     const result = rehearsalList.map((r) => {
         const relevant = attendanceList.filter((a) => a.rehearsal_id === r.id);

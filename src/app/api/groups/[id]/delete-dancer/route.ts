@@ -16,7 +16,7 @@ export async function DELETE(req: NextRequest) {
     } catch (error) {
         return NextResponse.json(
             { error: `Failed to delete dancer. Error: ${error}` },
-            { status: 500 }
+            { status: 500 },
         );
     }
 }

@@ -17,13 +17,19 @@ export async function POST(req: NextRequest) {
                 public_metadata,
             } = evt.data;
 
-            const role =
-                typeof public_metadata?.role === "string"
-                    ? public_metadata.role
+            type UserRole = "user" | "choreographer" | "admin";
+
+            const rawRole = public_metadata?.role;
+
+            const role: UserRole =
+                rawRole === "admin" ||
+                rawRole === "choreographer" ||
+                rawRole === "user"
+                    ? rawRole
                     : "user";
 
             const email = email_addresses?.[0]?.email_address;
-            
+
             await db.insert(users).values({
                 id,
                 email,

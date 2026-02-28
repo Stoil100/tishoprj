@@ -18,13 +18,13 @@ export async function POST(request: Request) {
         });
         return NextResponse.json(
             { message: "User created", user },
-            { status: 201 }
+            { status: 201 },
         );
     } catch (error) {
         console.error("Error in /api/admin/create-user:", error);
         return NextResponse.json(
             { error: error || "Something went wrong." },
-            { status: 400 }
+            { status: 400 },
         );
     }
 }

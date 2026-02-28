@@ -11,6 +11,7 @@ export interface Dancer {
     id: number;
     name: string;
     created_at: Date;
+    monthly_paid_at?: Date | null;
 }
 
 export interface DancerPayment {
