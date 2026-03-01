@@ -41,6 +41,7 @@ import { Check, ChevronsUpDown, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function CreateGroupForm({
     choreographers,
@@ -62,6 +63,7 @@ export default function CreateGroupForm({
 
     const onSubmit = async (values: GroupSchemaType) => {
         setIsSubmitting(true);
+
         try {
             const res = await fetch("/api/admin/create-group", {
                 method: "POST",
@@ -69,22 +71,25 @@ export default function CreateGroupForm({
                 body: JSON.stringify(values),
             });
 
-            if (res.ok) {
-                router.refresh();
-            } else {
-                const errorText = await res.text();
-                console.error("Failed to create group:", errorText);
-                // You could add toast notification here
+            const result = await res.json();
+
+            if (!res.ok) {
+                toast.error(result.message ?? "Възникна грешка.");
+                return;
             }
+
+            toast.success(result.message);
+            router.refresh();
+            form.reset();
         } catch (error) {
-            console.error("Error creating group:", error);
+            toast.error("Неочаквана грешка. Опитайте отново.");
         } finally {
             setIsSubmitting(false);
         }
     };
 
     const selectedChoreographer = choreographers.find(
-        (c) => c.id === form.watch("choreographer_id")
+        (c) => c.id === form.watch("choreographer_id"),
     );
 
     return (
@@ -151,7 +156,7 @@ export default function CreateGroupForm({
                                                     className={cn(
                                                         "h-11 justify-between",
                                                         !field.value &&
-                                                            "text-muted-foreground"
+                                                            "text-muted-foreground",
                                                     )}
                                                 >
                                                     {selectedChoreographer
@@ -187,10 +192,10 @@ export default function CreateGroupForm({
                                                                     }
                                                                     onSelect={() => {
                                                                         field.onChange(
-                                                                            choreographer.id
+                                                                            choreographer.id,
                                                                         );
                                                                         setOpen(
-                                                                            false
+                                                                            false,
                                                                         );
                                                                     }}
                                                                 >
@@ -200,14 +205,14 @@ export default function CreateGroupForm({
                                                                             field.value ===
                                                                                 choreographer.id
                                                                                 ? "opacity-100"
-                                                                                : "opacity-0"
+                                                                                : "opacity-0",
                                                                         )}
                                                                     />
                                                                     {
                                                                         choreographer.username
                                                                     }
                                                                 </CommandItem>
-                                                            )
+                                                            ),
                                                         )}
                                                     </CommandGroup>
                                                 </CommandList>

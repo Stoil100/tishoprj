@@ -23,6 +23,7 @@ import { Eye, EyeOff, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
 // 1) Define your Zod schema exactly as before:
@@ -41,8 +42,6 @@ const formSchema = z.object({
 export default function CreateUserForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
     const router = useRouter();
     // 2) Initialize react-hook-form with zodResolver:
@@ -57,8 +56,6 @@ export default function CreateUserForm() {
 
     // 3) Updated onSubmit:
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        setErrorMessage(null);
-        setSuccessMessage(null);
         setIsSubmitting(true);
 
         try {
@@ -68,21 +65,19 @@ export default function CreateUserForm() {
                 body: JSON.stringify(values),
             });
 
-            const data = await res.json();
+            const result = await res.json();
+
             if (!res.ok) {
-                // If clerkClient threw an error, it will come back here
-                throw new Error(data.error || "Failed to create user.");
+                toast.error(result.message ?? "Възникна грешка.");
+                return;
             }
 
-            // Success! Clear the form, show a success message, etc.
+            toast.success(result.message);
             router.refresh();
             form.reset();
-            setSuccessMessage(
-                `Successfully created user "${data.username}" (ID: ${data.id}).`
-            );
         } catch (error) {
             console.error("Create User Error:", error);
-            setErrorMessage("Something went wrong.");
+            toast.error("Неочаквана грешка. Опитайте отново.");
         } finally {
             setIsSubmitting(false);
         }
@@ -108,17 +103,6 @@ export default function CreateUserForm() {
                         onSubmit={form.handleSubmit(onSubmit)}
                         className="space-y-4"
                     >
-                        {errorMessage && (
-                            <div className="text-sm text-red-600">
-                                {errorMessage}
-                            </div>
-                        )}
-                        {successMessage && (
-                            <div className="text-sm text-green-600">
-                                {successMessage}
-                            </div>
-                        )}
-
                         <FormField
                             control={form.control}
                             name="username"
@@ -189,7 +173,7 @@ export default function CreateUserForm() {
                                                 className="absolute right-1 top-[2px]"
                                                 onClick={() =>
                                                     setShowPassword(
-                                                        !showPassword
+                                                        !showPassword,
                                                     )
                                                 }
                                             >
