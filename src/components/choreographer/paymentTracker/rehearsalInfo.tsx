@@ -20,19 +20,23 @@ export function RehearsalInfoComponent({
     rehearsalInfo,
     onRehearsalInfoChange,
 }: RehearsalInfoProps) {
+    const timeToMinutes = (time: string) => {
+        const [h, m] = time.split(":").map(Number);
+        return h * 60 + m;
+    };
+
     const handleDateChange = (date: string) => {
         onRehearsalInfoChange({ ...rehearsalInfo, date });
     };
 
     const handleStartTimeChange = (startTime: string) => {
-        const startHour = parseInt(startTime.split(":")[0]);
         let newEndTime = rehearsalInfo.endTime;
 
-        if (newEndTime) {
-            const endHour = parseInt(newEndTime.split(":")[0]);
-            if (endHour <= startHour) {
-                newEndTime = "";
-            }
+        if (
+            newEndTime &&
+            timeToMinutes(newEndTime) <= timeToMinutes(startTime)
+        ) {
+            newEndTime = "";
         }
 
         onRehearsalInfoChange({
@@ -43,14 +47,13 @@ export function RehearsalInfoComponent({
     };
 
     const handleEndTimeChange = (endTime: string) => {
-        const endHour = parseInt(endTime.split(":")[0]);
         let newStartTime = rehearsalInfo.startTime;
 
-        if (newStartTime) {
-            const startHour = parseInt(newStartTime.split(":")[0]);
-            if (startHour >= endHour) {
-                newStartTime = "";
-            }
+        if (
+            newStartTime &&
+            timeToMinutes(newStartTime) >= timeToMinutes(endTime)
+        ) {
+            newStartTime = "";
         }
 
         onRehearsalInfoChange({
@@ -60,41 +63,44 @@ export function RehearsalInfoComponent({
         });
     };
 
-    const allHours = Array.from({ length: 24 }, (_, i) =>
-        i.toString().padStart(2, "0"),
-    );
+    // Generate half-hour slots
+    // Generate half-hour slots INCLUDING 24:00
+    const allTimes = Array.from({ length: 49 }, (_, i) => {
+        const totalMinutes = i * 30;
+        const hour = Math.floor(totalMinutes / 60)
+            .toString()
+            .padStart(2, "0");
+        const minutes = totalMinutes % 60 === 0 ? "00" : "30";
+        return `${hour}:${minutes}`;
+    });
 
-    const selectedStartHour = rehearsalInfo.startTime
-        ? parseInt(rehearsalInfo.startTime.split(":")[0])
+    const selectedStart = rehearsalInfo.startTime
+        ? timeToMinutes(rehearsalInfo.startTime)
         : null;
 
-    const selectedEndHour = rehearsalInfo.endTime
-        ? parseInt(rehearsalInfo.endTime.split(":")[0])
+    const selectedEnd = rehearsalInfo.endTime
+        ? timeToMinutes(rehearsalInfo.endTime)
         : null;
 
-    const startHours =
-        selectedEndHour !== null
-            ? allHours.slice(0, selectedEndHour)
-            : allHours;
+    const startTimes =
+        selectedEnd !== null
+            ? allTimes.filter(
+                  (t) => t !== "24:00" && timeToMinutes(t) < selectedEnd,
+              )
+            : allTimes.filter((t) => t !== "24:00");
 
-    const endHours =
-        selectedStartHour !== null
-            ? allHours.slice(selectedStartHour + 1)
-            : allHours;
+    const endTimes =
+        selectedStart !== null
+            ? allTimes.filter((t) => timeToMinutes(t) > selectedStart)
+            : allTimes;
 
     return (
         <div className="p-6 bg-gradient-to-br from-background to-muted/30 rounded-lg border border-border">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Date */}
                 <div className="space-y-2">
-                    <Label
-                        htmlFor="rehearsal-date"
-                        className="text-base font-semibold"
-                    >
-                        Дата
-                    </Label>
+                    <Label className="text-base font-semibold">Дата</Label>
                     <Input
-                        id="rehearsal-date"
                         type="date"
                         value={rehearsalInfo.date}
                         onChange={(e) => handleDateChange(e.target.value)}
@@ -113,9 +119,9 @@ export function RehearsalInfoComponent({
                             <SelectValue placeholder="Час" />
                         </SelectTrigger>
                         <SelectContent className="z-9999">
-                            {startHours.map((hour) => (
-                                <SelectItem key={hour} value={`${hour}:00`}>
-                                    {hour}:00
+                            {startTimes.map((time) => (
+                                <SelectItem key={time} value={time}>
+                                    {time}
                                 </SelectItem>
                             ))}
                         </SelectContent>
@@ -133,9 +139,9 @@ export function RehearsalInfoComponent({
                             <SelectValue placeholder="Час" />
                         </SelectTrigger>
                         <SelectContent className="z-9999">
-                            {endHours.map((hour) => (
-                                <SelectItem key={hour} value={`${hour}:00`}>
-                                    {hour}:00
+                            {endTimes.map((time) => (
+                                <SelectItem key={time} value={time}>
+                                    {time}
                                 </SelectItem>
                             ))}
                         </SelectContent>
