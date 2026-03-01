@@ -161,8 +161,8 @@ export function SummaryDialog({
                                                       PAYMENT_RATES[
                                                           dancer.paymentType
                                                       ]
-                                                  } лв.`
-                                                : "0 лв."}
+                                                  } €`
+                                                : "0 €."}
                                         </span>
                                     </div>
                                 </div>

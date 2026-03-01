@@ -220,10 +220,10 @@ export default function PaymentTracker({
                                         <TableHead>Име</TableHead>
                                         <TableHead>Добавен на</TableHead>
                                         <TableHead className="text-center">
-                                            В брой/Карта (10лв)
+                                            В брой/Карта (10€)
                                         </TableHead>
                                         <TableHead className="text-center">
-                                            Спортни карти (8лв)
+                                            Спортни карти (8€)
                                         </TableHead>
                                         <TableHead className="text-center">
                                             Месечно/Присъствие
@@ -512,7 +512,7 @@ export default function PaymentTracker({
                                             <div className="grid grid-cols-3 gap-4 text-center">
                                                 <div className="p-4 bg-blue-50 rounded-lg">
                                                     <div className="text-2xl font-bold text-blue-600">
-                                                        {totalRevenue}лв
+                                                        {totalRevenue}€
                                                     </div>
                                                     <div className="text-sm text-muted-foreground">
                                                         Общо приходи
@@ -521,7 +521,7 @@ export default function PaymentTracker({
 
                                                 <div className="p-4 bg-orange-50 rounded-lg">
                                                     <div className="text-2xl font-bold text-orange-600">
-                                                        {managersShare}лв
+                                                        {managersShare}€
                                                     </div>
                                                     <div className="text-sm text-muted-foreground">
                                                         Мениджъри (40%)
@@ -530,7 +530,7 @@ export default function PaymentTracker({
 
                                                 <div className="p-4 bg-green-50 rounded-lg">
                                                     <div className="text-2xl font-bold text-green-600">
-                                                        {choreographerShare}лв
+                                                        {choreographerShare}€
                                                     </div>
                                                     <div className="text-sm text-muted-foreground">
                                                         Хореограф (60%)
