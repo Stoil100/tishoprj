@@ -81,7 +81,7 @@ export default function CreateGroupForm({
             toast.success(result.message);
             router.refresh();
             form.reset();
-        } catch (error) {
+        } catch {
             toast.error("Неочаквана грешка. Опитайте отново.");
         } finally {
             setIsSubmitting(false);
