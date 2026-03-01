@@ -1,14 +1,28 @@
 import { clerkClient } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-function normalizeClerkError(error: unknown) {
-    if (
+type ClerkErrorShape = {
+    errors: {
+        code?: string;
+        message?: string;
+    }[];
+};
+
+function isClerkError(error: unknown): error is ClerkErrorShape {
+    return (
         typeof error === "object" &&
         error !== null &&
         "errors" in error &&
-        Array.isArray((error as any).errors)
-    ) {
-        const clerkError = (error as any).errors[0];
+        Array.isArray((error as { errors?: unknown }).errors)
+    );
+}
+
+function normalizeClerkError(error: unknown): {
+    code: string;
+    message: string;
+} {
+    if (isClerkError(error)) {
+        const clerkError = error.errors[0];
 
         switch (clerkError.code) {
             case "form_identifier_exists":
