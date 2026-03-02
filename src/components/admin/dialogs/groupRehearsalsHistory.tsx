@@ -68,7 +68,7 @@ export function GroupHistoryDialog({ groupId }: { groupId: number }) {
 
     // Format currency with Bulgarian Lev symbol
     const formatCurrency = (amount: number) => {
-        return `${amount.toFixed(2)} лв.`;
+        return `${amount.toFixed(2)} €.`;
     };
 
     return (
