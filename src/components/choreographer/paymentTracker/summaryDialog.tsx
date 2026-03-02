@@ -11,6 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { Receipt } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 import { FinancialSummaryComponent } from "./financialSummary";
 import {
     type Dancer,
@@ -28,6 +29,7 @@ interface DancerWithPayment extends Dancer {
 interface SummaryDialogProps {
     isOpen: boolean;
     onOpenChange: (open: boolean) => void;
+    onReset: () => void;
     groupName: string;
     rehearsalInfo: RehearsalInfo;
     presentDancers: DancerWithPayment[];
@@ -40,6 +42,7 @@ interface SummaryDialogProps {
 export function SummaryDialog({
     isOpen,
     onOpenChange,
+    onReset,
     groupName,
     rehearsalInfo,
     presentDancers,
@@ -74,22 +77,25 @@ export function SummaryDialog({
                 }),
             });
 
+            const result = await res.json();
+
             if (!res.ok) {
-                const error = await res.json();
-                console.error("Save error:", error);
-                alert("Грешка при запазването на репетицията.");
-            } else {
-                // close dialog & refresh data
-                onOpenChange(false);
-                router.refresh();
+                toast.error(result.message ?? "Грешка при запазването.");
+                return;
             }
-        } catch (e) {
-            console.error(e);
-            alert("Грешка при изпращането на заявката.");
+
+            toast.success(result.message);
+
+            onReset(); // ✅ CLEAR DATA
+            onOpenChange(false);
+            router.refresh();
+        } catch {
+            toast.error("Грешка при изпращането на заявката.");
         } finally {
             setIsSaving(false);
         }
     };
+
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogTrigger asChild>
@@ -204,7 +210,7 @@ export function SummaryDialog({
                         onClick={handleSave}
                         disabled={isSaving}
                     >
-                        {isSaving ? "Запазвам..." : "Запази"}
+                        {isSaving ? "Запазване..." : "Запази"}
                     </Button>
                 </div>
             </DialogContent>

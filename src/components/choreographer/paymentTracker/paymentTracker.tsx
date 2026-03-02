@@ -97,6 +97,16 @@ export default function PaymentTracker({
         return dancers.filter((d) => !presentIds.includes(d.id));
     }, [payments, dancers]);
 
+    const resetRehearsalData = () => {
+        setPayments([]);
+        setRehearsalInfo({
+            date: "",
+            startTime: "",
+            endTime: "",
+            choreographer_id: choreographerId || "",
+        });
+    };
+
     if (dancers.length === 0) {
         return (
             <Card>
@@ -135,6 +145,7 @@ export default function PaymentTracker({
                     <SummaryDialog
                         paramsId={paramsId}
                         isOpen={isDialogOpen}
+                        onReset={resetRehearsalData}
                         onOpenChange={setIsDialogOpen}
                         groupName={groupName}
                         rehearsalInfo={rehearsalInfo}
