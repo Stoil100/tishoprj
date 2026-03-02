@@ -232,7 +232,7 @@ export default function CreateGroupForm({
                             <Button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="flex-1"
+                                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                             >
                                 {isSubmitting ? "Създаване..." : "Създай група"}
                             </Button>

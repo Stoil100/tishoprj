@@ -28,8 +28,7 @@ export default function Home() {
                             <div className="flex flex-col justify-center space-y-4">
                                 <div className="space-y-2">
                                     <Badge
-                                        variant="secondary"
-                                        className="w-fit"
+                                        className="w-fit bg-transparent text-black"
                                     >
                                         За танцови професионалисти
                                     </Badge>

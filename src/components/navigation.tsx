@@ -25,12 +25,16 @@ export default function Navigation() {
     return (
         <header
             ref={navRef}
-            className="fixed top-0 z-[999] w-full border-b bg-background shadow-sm"
+            className="fixed top-0 z-[999] w-full border-b bg-gradient-to-r from-blue-600 to-blue-700 shadow-sm"
         >
-            <nav className="flex items-center justify-between p-4">
+            <nav className="flex items-center justify-between p-4 text-white text-shadow-sm">
                 <div className="flex lg:flex-1">
                     <SignedOut>
-                        <Link href="/auth">Вписване</Link>
+                        <Link
+                            href="/auth"
+                        >
+                            Вписване
+                        </Link>
                     </SignedOut>
                     <SignedIn>
                         {role === "admin" ? (
