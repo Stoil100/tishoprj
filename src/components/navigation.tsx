@@ -30,11 +30,13 @@ export default function Navigation() {
             <nav className="flex items-center justify-between p-4 text-white text-shadow-sm">
                 <div className="flex lg:flex-1">
                     <SignedOut>
-                        <Link
-                            href="/auth"
-                        >
-                            Вписване
-                        </Link>
+                        <Button variant="ghost">
+                            <Link
+                                href="/auth"
+                            >
+                                Вписване
+                            </Link>
+                        </Button>
                     </SignedOut>
                     <SignedIn>
                         {role === "admin" ? (
@@ -58,9 +60,9 @@ export default function Navigation() {
                 <SignedIn>
                     <div className="flex items-center gap-2">
                         <SignOutButton>
-                            <div className="cursor-pointer flex items-center justify-center gap-2">
-                                Изход <LogOut />
-                            </div>
+                            <Button variant="ghost" className="cursor-pointer flex items-center justify-center gap-2">
+                                Изход <LogOut/>
+                            </Button>
                         </SignOutButton>
                     </div>
                 </SignedIn>
