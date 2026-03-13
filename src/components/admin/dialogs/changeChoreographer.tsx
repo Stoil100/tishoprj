@@ -111,7 +111,7 @@ export function ChangeChoreographerDialog({
                     <Button
                         onClick={handleSave}
                         disabled={!selectedId || isSaving}
-                        className="w-full"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
                     >
                         {isSaving ? "Запазване..." : "Запази"}
                     </Button>
