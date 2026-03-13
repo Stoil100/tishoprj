@@ -33,7 +33,8 @@ export function ChangeChoreographerDialog({
     groupId: number;
     choreographers: { id: string; username: string }[];
 }) {
-    const [open, setOpen] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [popoverOpen, setPopoverOpen] = useState(false);
     const [selectedId, setSelectedId] = useState("");
     const [isSaving, setIsSaving] = useState(false);
     const router = useRouter();
@@ -47,26 +48,29 @@ export function ChangeChoreographerDialog({
         });
         router.refresh();
         setIsSaving(false);
-        setOpen(false);
+        setDialogOpen(false);
     };
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
                 <Button size="sm" variant="outline" className="h-8 w-8 p-0">
                     <UserPen className="h-4 w-4" />
                 </Button>
             </DialogTrigger>
+
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Смяна на хореограф</DialogTitle>
                 </DialogHeader>
+
                 <div className="space-y-4">
-                    <Popover>
+                    <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
                         <PopoverTrigger asChild>
                             <Button
                                 variant="outline"
                                 role="combobox"
+                                aria-expanded={popoverOpen}
                                 className={cn(
                                     "w-full justify-between",
                                     !selectedId && "text-muted-foreground",
@@ -77,6 +81,7 @@ export function ChangeChoreographerDialog({
                                 <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
                             </Button>
                         </PopoverTrigger>
+
                         <PopoverContent className="w-full p-0">
                             <Command>
                                 <CommandInput placeholder="Търсене на хореографи..." />
@@ -84,13 +89,15 @@ export function ChangeChoreographerDialog({
                                     <CommandEmpty>
                                         Не е намерен хореограф.
                                     </CommandEmpty>
+
                                     <CommandGroup>
                                         {choreographers.map((c) => (
                                             <CommandItem
                                                 key={c.id}
-                                                onSelect={() =>
-                                                    setSelectedId(c.id)
-                                                }
+                                                onSelect={() => {
+                                                    setSelectedId(c.id);
+                                                    setPopoverOpen(false); // затваря само combobox
+                                                }}
                                             >
                                                 <Check
                                                     className={cn(
@@ -108,6 +115,7 @@ export function ChangeChoreographerDialog({
                             </Command>
                         </PopoverContent>
                     </Popover>
+
                     <Button
                         onClick={handleSave}
                         disabled={!selectedId || isSaving}
