@@ -25,7 +25,7 @@ export default function Navigation() {
     return (
         <header
             ref={navRef}
-            className="fixed top-0 z-[999] w-full border-b bg-gradient-to-r from-blue-600 to-blue-700 shadow-sm"
+            className="fixed top-0 z-[999] w-full border-b border-white/20 bg-gradient-to-r from-[#D84A44] via-[#C2352F] to-[#A91F1A] shadow-sm"
         >
             <nav className="flex items-center justify-between p-4 text-white text-shadow-sm">
                 <div className="flex lg:flex-1">
