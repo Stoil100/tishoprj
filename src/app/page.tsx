@@ -7,12 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import {
-    Calendar,
-    CheckCircle,
-    DollarSign,
-    Users
-} from "lucide-react";
+import { Calendar, CheckCircle, DollarSign, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -209,14 +204,20 @@ export default function Home() {
                 </section>
 
                 {/* CTA секция */}
-                <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-blue-600 to-blue-700  flex justify-center">
-                    <div className="container px-4 md:px-6">
+                <section className="w-full py-12 md:py-24 lg:py-32 flex justify-center relative overflow-hidden">
+                    {/* Background image with blur */}
+                    <div className="absolute inset-0">
+                        <div className="w-full h-full bg-[url('/dancers-bw.png')] bg-cover bg-center bg-no-repeat blur-sm scale-105" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="container px-4 md:px-6 relative z-10">
                         <div className="flex flex-col items-center justify-center space-y-4 text-center text-white">
                             <div className="space-y-2">
-                                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl drop-shadow-lg">
                                     Готови ли сте да трансформирате студиото си?
                                 </h2>
-                                <p className="mx-auto max-w-[600px] text-blue-100 md:text-xl">
+                                <p className="mx-auto max-w-[600px] md:text-xl drop-shadow-md">
                                     Присъединете се към стотици хореографи,
                                     които вече оптимизираха работния си процес.
                                     Започнете още днес.
@@ -225,8 +226,7 @@ export default function Home() {
                             <div className="flex flex-col gap-2 min-[400px]:flex-row">
                                 <Button
                                     size="lg"
-                                    variant="secondary"
-                                    className="bg-white text-blue-600 hover:bg-gray-100"
+                                    className="bg-white text-black hover:bg-gray-200 shadow-md"
                                 >
                                     Започнете сега
                                 </Button>
