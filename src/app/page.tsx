@@ -47,9 +47,6 @@ export default function Home() {
                                             Започнете своето пътешествие
                                         </Link>
                                     </Button>
-                                    <Button variant="outline" size="lg">
-                                        Научете повече
-                                    </Button>
                                 </div>
                             </div>
                             <div className="flex items-center justify-center">
