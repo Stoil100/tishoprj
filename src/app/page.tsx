@@ -204,20 +204,14 @@ export default function Home() {
                 </section>
 
                 {/* CTA секция */}
-                <section className="w-full py-12 md:py-24 lg:py-32 flex justify-center relative overflow-hidden">
-                    {/* Background image with blur */}
-                    <div className="absolute inset-0">
-                        <div className="w-full h-full bg-[url('/dancers-bw.png')] bg-cover bg-center bg-no-repeat blur-sm scale-105" />
-                    </div>
-
-                    {/* Content */}
-                    <div className="container px-4 md:px-6 relative z-10">
+                <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-[#E1473F] to-[#D62828] flex justify-center">
+                    <div className="container px-4 md:px-6">
                         <div className="flex flex-col items-center justify-center space-y-4 text-center text-white">
                             <div className="space-y-2">
-                                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl drop-shadow-lg">
+                                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
                                     Готови ли сте да трансформирате студиото си?
                                 </h2>
-                                <p className="mx-auto max-w-[600px] md:text-xl drop-shadow-md">
+                                <p className="mx-auto max-w-[600px] text-red-50 md:text-xl opacity-90">
                                     Присъединете се към стотици хореографи,
                                     които вече оптимизираха работния си процес.
                                     Започнете още днес.
@@ -226,7 +220,8 @@ export default function Home() {
                             <div className="flex flex-col gap-2 min-[400px]:flex-row">
                                 <Button
                                     size="lg"
-                                    className="bg-white text-black hover:bg-gray-200 shadow-md"
+                                    variant="secondary"
+                                    className="bg-white text-[#D62828] hover:bg-gray-100 transition-colors"
                                 >
                                     Започнете сега
                                 </Button>
