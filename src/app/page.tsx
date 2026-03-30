@@ -66,7 +66,7 @@ export default function Home() {
                 <section className="w-full py-12 md:py-24 lg:py-32 flex justify-center">
                     <div className="container px-4 md:px-6">
                         <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                            <div className="space-y-2">
+                            <div className="space-y-2 flex flex-col items-center justify-center">
                                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
                                     Всичко необходимо за управление на вашето
                                     студио
@@ -79,8 +79,8 @@ export default function Home() {
                                 </p>
                             </div>
                         </div>
-                        <div className="mx-auto grid max-w-5xl items-start gap-6 py-12 lg:grid-cols-3 lg:gap-12">
-                            <Card className="relative overflow-hidden">
+                        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+                            <Card className="relative h-full overflow-hidden">
                                 <CardHeader>
                                     <Calendar className="h-10 w-10 text-blue-600" />
                                     <CardTitle>
@@ -110,7 +110,7 @@ export default function Home() {
                                 </CardContent>
                             </Card>
 
-                            <Card className="relative overflow-hidden">
+                            <Card className="relative h-full overflow-hidden">
                                 <CardHeader>
                                     <DollarSign className="h-10 w-10 text-green-600" />
                                     <CardTitle>
@@ -139,7 +139,7 @@ export default function Home() {
                                 </CardContent>
                             </Card>
 
-                            <Card className="relative overflow-hidden">
+                            <Card className="relative h-full overflow-hidden">
                                 <CardHeader>
                                     <Users className="h-10 w-10 text-blue-600" />
                                     <CardTitle>Организация на групи</CardTitle>
@@ -165,7 +165,8 @@ export default function Home() {
                                     </ul>
                                 </CardContent>
                             </Card>
-                            <Card className="relative overflow-hidden">
+
+                            <Card className="relative h-full overflow-hidden">
                                 <CardHeader>
                                     <Users className="h-10 w-10 text-blue-600" />
                                     <CardTitle>
