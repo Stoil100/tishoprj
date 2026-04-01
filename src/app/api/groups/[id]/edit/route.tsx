@@ -14,7 +14,7 @@ const updateGroupSchema = z.object({
 
 export async function PUT(
     request: Request,
-    { params }: { params: { id: string } },
+    context: { params: Promise<{ id: string }> },
 ) {
     try {
         const { userId } = await auth();
@@ -26,7 +26,8 @@ export async function PUT(
             );
         }
 
-        const groupId = Number(params.id);
+        const { id } = await context.params;
+        const groupId = Number(id);
 
         if (Number.isNaN(groupId)) {
             return Response.json(
