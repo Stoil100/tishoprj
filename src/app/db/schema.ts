@@ -35,12 +35,22 @@ export const users = pgTable(
     }),
 );
 
+export const groupColorEnum = pgEnum("group_color", [
+    "gray",
+    "blue",
+    "green",
+    "yellow",
+    "red",
+    "purple",
+]);
+
 export const groups = pgTable("groups", {
     id: serial("id").primaryKey(),
     name: text("name").notNull(),
     choreographer_id: varchar("choreographer_id", { length: 191 })
         .notNull()
         .references(() => users.id),
+    color: groupColorEnum("color").default("gray").notNull(),
     created_at: timestamp("created_at").defaultNow().notNull(),
 });
 

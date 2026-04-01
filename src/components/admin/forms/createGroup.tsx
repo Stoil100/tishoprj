@@ -43,6 +43,15 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+const PRESET_COLORS = [
+    { id: "gray", label: "Сиво", bgClass: "bg-gray-400" },
+    { id: "blue", label: "Синьо", bgClass: "bg-blue-500" },
+    { id: "green", label: "Зелено", bgClass: "bg-green-500" },
+    { id: "yellow", label: "Жълто", bgClass: "bg-yellow-400" },
+    { id: "red", label: "Червено", bgClass: "bg-red-500" },
+    { id: "purple", label: "Лилаво", bgClass: "bg-purple-500" },
+] as const;
+
 export default function CreateGroupForm({
     choreographers,
 }: {
@@ -56,6 +65,7 @@ export default function CreateGroupForm({
         defaultValues: {
             name: "",
             choreographer_id: "",
+            color: "gray",
         },
     });
 
@@ -90,6 +100,10 @@ export default function CreateGroupForm({
 
     const selectedChoreographer = choreographers.find(
         (c) => c.id === form.watch("choreographer_id"),
+    );
+
+    const selectedColorObj = PRESET_COLORS.find(
+        (c) => c.id === form.watch("color"),
     );
 
     return (
@@ -222,6 +236,57 @@ export default function CreateGroupForm({
                                     <FormDescription>
                                         Потърсете и изберете хореограф, който ще
                                         ръководи групата
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
+                        {/* Color Selection */}
+                        <FormField
+                            control={form.control}
+                            name="color"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-base font-medium">
+                                        Цвят на групата
+                                    </FormLabel>
+                                    <FormControl>
+                                        <div className="flex flex-wrap gap-3">
+                                            {PRESET_COLORS.map((color) => (
+                                                <button
+                                                    key={color.id}
+                                                    type="button"
+                                                    onClick={() =>
+                                                        field.onChange(color.id)
+                                                    }
+                                                    className={cn(
+                                                        "relative flex h-12 w-12 items-center justify-center rounded-lg border-2 transition-all duration-200",
+                                                        field.value === color.id
+                                                            ? "border-foreground shadow-lg scale-110"
+                                                            : "border-transparent hover:scale-105 hover:shadow-md",
+                                                    )}
+                                                    title={color.label}
+                                                    aria-label={`Select ${color.label} color`}
+                                                >
+                                                    <div
+                                                        className={cn(
+                                                            "h-10 w-10 rounded-md",
+                                                            color.bgClass,
+                                                        )}
+                                                    />
+                                                    {field.value ===
+                                                        color.id && (
+                                                        <Check className="absolute h-5 w-5 text-white drop-shadow-lg" />
+                                                    )}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </FormControl>
+                                    <FormDescription>
+                                        Изберете цвят за вашата група. Това
+                                        поможе при организирането и
+                                        филтрирането.
                                     </FormDescription>
                                     <FormMessage />
                                 </FormItem>

@@ -6,11 +6,11 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
     try {
         const json = await req.json();
-        const { name, choreographer_id } = bodySchema.parse(json);
+        const { name, choreographer_id, color } = bodySchema.parse(json);
 
         const [created] = await db
             .insert(groups)
-            .values({ name, choreographer_id })
+            .values({ name, choreographer_id, color })
             .returning();
 
         return NextResponse.json(

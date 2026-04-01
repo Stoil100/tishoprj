@@ -1,5 +1,6 @@
 import { db } from "@/app/db";
 import { dancers, groups, users } from "@/app/db/schema";
+import EditGroupHeader from "@/components/admin/forms/editGroup";
 import AddDancerForm from "@/components/choreographer/addDancer";
 import PaymentTracker from "@/components/choreographer/paymentTracker/paymentTracker";
 import { auth } from "@clerk/nextjs/server";
@@ -15,12 +16,13 @@ export default async function GroupPage({
     const groupId = Number(id);
     const { userId } = await auth();
 
-    // Load the group
+    // Load the group with color field
     const [group] = await db
         .select({
             id: groups.id,
             name: groups.name,
             choreographer_id: groups.choreographer_id,
+            color: groups.color,
         })
         .from(groups)
         .where(eq(groups.id, groupId));
@@ -32,6 +34,7 @@ export default async function GroupPage({
     if (!group) {
         redirect("/groups");
     }
+
     // Load all dancers in this group
     const groupDancers = await db
         .select({
@@ -49,9 +52,14 @@ export default async function GroupPage({
         .where(eq(users.id, group.choreographer_id));
 
     const choreographerName = choreoUser?.username ?? "Unknown";
+
     return (
         <div className="max-w-6xl mx-auto py-12 space-y-8">
-            <h1 className="text-2xl font-semibold">Група: {group.name}</h1>
+            <EditGroupHeader
+                groupId={groupId}
+                groupName={group.name}
+                currentColor={group.color || "gray"}
+            />
 
             <AddDancerForm groupId={groupId} />
 
