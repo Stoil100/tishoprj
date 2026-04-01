@@ -102,10 +102,6 @@ export default function CreateGroupForm({
         (c) => c.id === form.watch("choreographer_id"),
     );
 
-    const selectedColorObj = PRESET_COLORS.find(
-        (c) => c.id === form.watch("color"),
-    );
-
     return (
         <Card>
             <CardHeader className="space-y-1">
